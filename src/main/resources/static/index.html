@@ -76,13 +76,23 @@ if (riktig) {
             });
         }
         function formaterData(kunder) {
-            let ut = "<table class='table table-striped'><tr><th>Film</th> <th>Antall</th> <th>Fornavn</th> <th>Etternavn</th> <th>Telefonnr</th> <th>Epost</th> </tr>";
+            let ut = "<table class='table table-striped'><tr><th>Film</th> <th>Antall</th> <th>Fornavn</th> <th>Etternavn</th> <th>Telefonnr</th> <th>Epost</th> <th></th></tr>";
             for (const kunde of kunder) {
                 ut+="<tr><td>"+kunde.film+ "</td><td>"+kunde.antall+"</td><td>"+ kunde.fornavn + "</td><td>"+ kunde.etternavn + "</td><td>"+ kunde.telefonnr +
-                    "</td><td>"+ kunde.epost +"</td></>" }
+                    "</td><td>"+ kunde.epost +"</td>"+
+"<td> <button class='btn btn-danger' onclick='slettEnKunde("+kunde.id+")'>Slett</button></td>"+
+                    "</tr>" }
             ut+="</table>";
             $("#billetter").html(ut);
         }
+
+        function slettEnKunde(id) {
+            const url="/slettEnKunde?id=" + id;
+            $.get(url,function(){
+                window.location.href="/";
+            })
+        }
+
         function slett() { $.get("/slett",function() {
             hentAlle();
         })

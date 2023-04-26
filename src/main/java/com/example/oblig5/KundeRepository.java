@@ -13,17 +13,26 @@ public class KundeRepository {
     private JdbcTemplate db;
 
     public void lagreKunde(Kunde innKunde) {
-        String sql="INSERT INTO Kunde (fornavn,etternavn,telefonnr,epost,antall,film) VALUES(?,?,?,?,?)";
-        db.update(sql,innKunde.getFornavn(),innKunde.getEtternavn(),innKunde.getEpost(),innKunde.getAntall(),innKunde.getFilm());
+        String sql="INSERT INTO Kunde (fornavn,etternavn,telefonnr,epost,antall,film) VALUES(?,?,?,?,?,?)";
+        db.update(sql,innKunde.getFornavn(),innKunde.getEtternavn(),innKunde.getTelefonnr(),innKunde.getEpost(),innKunde.getAntall(),innKunde.getFilm());
     }
 public List<Kunde> hentAlleKunder() {
         String sql="SELECT * FROM Kunde";
         List<Kunde> alleBilletter=db.query(sql,new BeanPropertyRowMapper(Kunde.class));
         return alleBilletter;
 }
+
+public void slettEnKunde(int id) {
+        String sql= "DELETE FROM Kunde WHERE id=?";
+        db.update(sql);
+}
+
+
+
 public void slettAlleKunder() {
         String sql= "DELETE FROM Kunde";
         db.update(sql);
 }
+
 
 }

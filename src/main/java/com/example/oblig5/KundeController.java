@@ -20,8 +20,14 @@ public class KundeController {
         return rep.hentAlleKunder();
     }
 
+    @GetMapping("/slettEnKunde")
+    public void slettEnKunde(int id) {
+        rep.slettEnKunde(id);
+    }
+
     @GetMapping("/slett")
 public void slettAlle() {rep.slettAlleKunder();
     }
+
 }
 
